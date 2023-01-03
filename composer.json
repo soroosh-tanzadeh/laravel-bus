@@ -8,11 +8,22 @@
         }
     ],
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^9.5",
+        "orchestra/testbench": "^7.17"
     },
     "autoload": {
         "psr-4": {
-            "Arvan\\Bus": "src/"
+            "Arvan\\Bus\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Arvan\\Bus\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
+        ]
     }
 }
