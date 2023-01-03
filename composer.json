@@ -13,17 +13,24 @@
     },
     "autoload": {
         "psr-4": {
-            "Arvan\\Bus\\": "src"
+            "Arvan\\LaravelBus\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Arvan\\Bus\\Tests\\": "tests"
+            "Arvan\\LaravelBus\\Tests\\": "tests"
         }
     },
     "scripts": {
         "post-autoload-dump": [
             "@php vendor/bin/testbench package:discover --ansi"
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Arvan\\LaravelBus\\LaravelBusServiceProvider"
+            ]
+        }
     }
 }
