@@ -1,0 +1,18 @@
+{
+    "name": "arvan/laravel-bus",
+    "description": "Enhanced laravel illuminate\\bus",
+    "authors": [
+        {
+            "name": "Soroosh Tanzadeh",
+            "email": "soroosh.tanzadeh@arvancloud.email"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arvan\\Bus": "src/"
+        }
+    }
+}
