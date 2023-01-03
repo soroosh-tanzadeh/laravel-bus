@@ -1,8 +1,8 @@
 <?php
 
-namespace App\LaravelBus\Job;
+namespace Arvan\LaravelBus\Job;
 
-use App\Traits\Dispatchable\Dispatchable;
+use Arvan\LaravelBus\Bus\Dispatchable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 abstract class DispatchableShouldQueue implements ShouldQueue

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\LaravelBus\Bus;
+namespace Arvan\LaravelBus\Bus;
 
 use Illuminate\Support\Str;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
@@ -74,8 +74,8 @@ class PendingDispatch extends BusPendingDispatch
             }
         } catch (\Throwable $th) {
             $defaultConnection = config('queue.default');
-            $defaultConnetionSettings = config("queue.connections.$defaultConnection");
-            $queue = $this->job->queue ?? $defaultConnetionSettings['queue'];
+            $defaultConnectionSettings = config("queue.connections.$defaultConnection");
+            $queue = $this->job->queue ?? ($defaultConnectionSettings['queue'] ?? "default");
 
             /** @var FailedJobProviderInterface $queueFailedJobProvider */
             $queueFailedJobProvider = app("queue.failer");
