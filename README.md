@@ -1,3 +1,5 @@
+![Test](https://github.com/soroosh-tanzadeh/laravel-bus/actions/workflows/php.yml/badge.svg)
+
 # Laravel Bus
 Enhanced laravel Illuminate\Bus.
 
