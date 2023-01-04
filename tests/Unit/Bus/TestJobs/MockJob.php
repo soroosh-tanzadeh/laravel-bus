@@ -1,26 +1,21 @@
 <?php
 
-namespace DummyNamespace;
+namespace Arvan\LaravelBus\Tests\Unit\Bus\TestJobs;
 
 use Arvan\LaravelBus\Job\DispatchableShouldQueue;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class DummyClass implements DispatchableShouldQueue
+class MockJob extends DispatchableShouldQueue
 {
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
 
-     public function __construct()
-    {
-        // TODO
-    }
-
-
     public function handle()
     {
-        // TODO
+        Log::info("Hi from job");
     }
 }
