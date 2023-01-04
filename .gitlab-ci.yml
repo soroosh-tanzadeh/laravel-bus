@@ -2,6 +2,7 @@ image: php:8.1.12-cli
 
 stages:
   - tests
+  - deploy
   
 before_script:
   - apt-get update && apt-get install libzip-dev -y
@@ -16,3 +17,13 @@ test:
   stage: tests
   script:
     - vendor/bin/phpunit
+
+deploy:
+    stage: deploy
+    only:
+      - tags
+    script:
+      - apt-get update
+      - apt-get install curl -y
+      - 'curl --header "Job-Token: $CI_JOB_TOKEN" --data tag=<tag> "${CI_API_V4_URL}/projects/$CI_PROJECT_ID/packages/composer"'
+    environment: production
