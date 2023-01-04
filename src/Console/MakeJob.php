@@ -1,6 +1,6 @@
 <?php
 
-namespace Arvan\LaravelBus\Console;
+namespace Soroosh\LaravelBus\Console;
 
 use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Console\GeneratorCommand;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Arvan\LaravelBus\Tests;
+namespace Soroosh\LaravelBus\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\Concerns\CreatesApplication;

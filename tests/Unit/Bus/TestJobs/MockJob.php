@@ -1,8 +1,8 @@
 <?php
 
-namespace Arvan\LaravelBus\Tests\Unit\Bus\TestJobs;
+namespace Soroosh\LaravelBus\Tests\Unit\Bus\TestJobs;
 
-use Arvan\LaravelBus\Job\DispatchableShouldQueue;
+use Soroosh\LaravelBus\Job\DispatchableShouldQueue;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;

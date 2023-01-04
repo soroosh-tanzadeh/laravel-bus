@@ -1,6 +1,6 @@
 <?php
 
-namespace Arvan\LaravelBus\Bus;
+namespace Soroosh\LaravelBus\Bus;
 
 use Closure;
 use Illuminate\Contracts\Bus\Dispatcher;

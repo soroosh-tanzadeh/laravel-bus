@@ -1,6 +1,6 @@
 <?php
 
-namespace Arvan\LaravelBus\Mocks;
+namespace Soroosh\LaravelBus\Mocks;
 use Closure;
 use Illuminate\Contracts\Cache\Repository as Cache;
 

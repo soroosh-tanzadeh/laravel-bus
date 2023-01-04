@@ -3,8 +3,8 @@
 namespace Arvan\Bus\Tests\Unit;
 
 use Illuminate\Filesystem\Filesystem;
-use Arvan\LaravelBus\Tests\TestCase;
-use Arvan\LaravelBus\LaravelBusServiceProvider;
+use Soroosh\LaravelBus\Tests\TestCase;
+use Soroosh\LaravelBus\LaravelBusServiceProvider;
 
 class MakeJobCommandTest extends TestCase
 {
@@ -32,7 +32,7 @@ class MakeJobCommandTest extends TestCase
     /**
      * Load package service provider
      * @param  \Illuminate\Foundation\Application $app
-     * @return Arvan\LaravelBus\LaravelBusServiceProvider
+     * @return Soroosh\LaravelBus\LaravelBusServiceProvider
      */
     protected function getPackageProviders($app)
     {
@@ -48,7 +48,7 @@ class MakeJobCommandTest extends TestCase
 
         $this->files = new Filesystem();
         $this->classname = 'TestJob';
-        $this->filepath = $this->app['path'] . '/' . $this->classname . '.php';
+        $this->filepath = $this->app['path'] . '/Jobs/' . $this->classname . '.php';
     }
 
     /**
@@ -74,13 +74,13 @@ class MakeJobCommandTest extends TestCase
     public function testCreateClassInSubfolder()
     {
         $subfolder = 'Subfolder';
-        $filepath = $this->app['path'] . '/' . $subfolder . '/' . $this->classname . '.php';
+        $filepath = $this->app['path'] . '/Jobs/' . $subfolder . '/' . $this->classname . '.php';
 
         $this->artisan('laravel-bus:make-job', ['name' => $subfolder . '\\' . $this->classname, '--force' => true]);
         $class_content = $this->files->get($filepath);
 
         $this->assertTrue($this->files->exists($filepath));
         $this->assertStringContainsString('class ' . $this->classname, $class_content);
-        $this->assertStringContainsString('namespace App\\' . $subfolder, $class_content);
+        $this->assertStringContainsString('namespace App\\Jobs\\' . $subfolder, $class_content);
     }
 }

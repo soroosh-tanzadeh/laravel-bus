@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use Arvan\LaravelBus\Job\DispatchableShouldQueue;
+use Soroosh\LaravelBus\Job\DispatchableShouldQueue;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;

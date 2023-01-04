@@ -1,8 +1,8 @@
 <?php
 
-namespace Arvan\LaravelBus;
+namespace Soroosh\LaravelBus;
 
-use Arvan\LaravelBus\Console\MakeJob;
+use Soroosh\LaravelBus\Console\MakeJob;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelBusServiceProvider extends ServiceProvider

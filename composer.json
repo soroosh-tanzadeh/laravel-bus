@@ -13,12 +13,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Arvan\\LaravelBus\\": "src"
+            "Soroosh\\LaravelBus\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Arvan\\LaravelBus\\Tests\\": "tests"
+            "Soroosh\\LaravelBus\\Tests\\": "tests"
         }
     },
     "scripts": {

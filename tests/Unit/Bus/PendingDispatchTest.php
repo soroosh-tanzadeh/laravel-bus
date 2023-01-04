@@ -1,10 +1,10 @@
 <?php
 
-namespace Arvan\LaravelBus\Tests\Unit\Bus;
+namespace Soroosh\LaravelBus\Tests\Unit\Bus;
 
-use Arvan\LaravelBus\Mocks\DispatcherMock;
-use Arvan\LaravelBus\Tests\TestCase;
-use Arvan\LaravelBus\Tests\Unit\Bus\TestJobs\MockJob;
+use Soroosh\LaravelBus\Mocks\DispatcherMock;
+use Soroosh\LaravelBus\Tests\TestCase;
+use Soroosh\LaravelBus\Tests\Unit\Bus\TestJobs\MockJob;
 use Illuminate\Contracts\Bus\Dispatcher;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
 use Mockery\MockInterface;

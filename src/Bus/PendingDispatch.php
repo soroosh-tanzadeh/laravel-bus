@@ -1,6 +1,6 @@
 <?php
 
-namespace Arvan\LaravelBus\Bus;
+namespace Soroosh\LaravelBus\Bus;
 
 use Illuminate\Support\Str;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;

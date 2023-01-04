@@ -10,13 +10,13 @@ Create a new job
   php artisan laravel-bus:make-job DummyJob 
 ```
 
-Or just extends ``Arvan\LaravelBus\Job\DispatchableShouldQueue`` in existing job:
+Or just extends ``Soroosh\LaravelBus\Job\DispatchableShouldQueue`` in existing job:
 
 ```php
 <?php
 namespace App\Jobs;
 
-use Arvan\LaravelBus\Job\DispatchableShouldQueue;
+use Soroosh\LaravelBus\Job\DispatchableShouldQueue;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
