@@ -1,27 +1,17 @@
-name: PHP Composer
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+name: CI
 
-permissions:
-  contents: read
+on: [push]
 
 jobs:
-  Test:
+  build-test:
     runs-on: ubuntu-latest
     steps:
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-    - name: Install dependencies
-      run: ls /home/runner/work/laravel-bus/laravel-bus/ && composer install --prefer-dist --no-progress
-    - name: Test
-      run: vendor/bin/phpunit
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v6
+      - name: PHPUnit Tests
+        uses: php-actions/phpunit@master
+        with:
+          bootstrap: vendor/autoload.php
+          configuration: test/phpunit.xml
+          args: --coverage-text
