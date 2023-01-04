@@ -7,7 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 
-class DummyClass implements DispatchableShouldQueue
+class DummyClass extends DispatchableShouldQueue
 {
     use InteractsWithQueue;
     use Queueable;
