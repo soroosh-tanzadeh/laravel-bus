@@ -32,5 +32,8 @@
                 "Soroosh\\LaravelBus\\LaravelBusServiceProvider"
             ]
         }
-    }
+    },
+  "require": {
+    "ext-redis": "*"
+  }
 }

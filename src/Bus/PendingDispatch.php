@@ -2,25 +2,31 @@
 
 namespace Soroosh\LaravelBus\Bus;
 
+use Throwable;
+use RedisException;
 use Illuminate\Support\Str;
+use Illuminate\Bus\UniqueLock;
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Bus\Dispatcher;
+use Illuminate\Contracts\Encryption\Encrypter;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldBeEncrypted;
+use Illuminate\Contracts\Cache\Repository as Cache;
 use Illuminate\Queue\Failed\FailedJobProviderInterface;
 use Illuminate\Foundation\Bus\PendingDispatch as BusPendingDispatch;
-use Illuminate\Contracts\Queue\ShouldBeEncrypted;
-use Illuminate\Contracts\Encryption\Encrypter;
-use Illuminate\Contracts\Bus\Dispatcher;
 
 class PendingDispatch extends BusPendingDispatch
 {
-    private function jobShouldBeEncrypted($job)
+    private function jobShouldBeEncrypted($job): bool
     {
-        if ($this->job instanceof ShouldBeEncrypted) {
+        if ($job instanceof ShouldBeEncrypted) {
             return true;
         }
 
         return isset($job->shouldBeEncrypted) && $job->shouldBeEncrypted;
     }
 
-    private function createJobPayload($queue)
+    private function createJobPayload(): array
     {
         $uuid = Str::uuid();
         $jobClass = get_class($this->job);
@@ -56,6 +62,31 @@ class PendingDispatch extends BusPendingDispatch
         ];
     }
 
+    /**
+     * Determine if the job should be dispatched.
+     *
+     * @return bool
+     */
+    protected function shouldDispatch()
+    {
+        if (!$this->job instanceof ShouldBeUnique) {
+            return true;
+        }
+
+        $redisLock = false;
+        try {
+            $redisLock = (new UniqueLock(Container::getInstance()->make(Cache::class)))
+                ->acquire($this->job);
+        } catch (\RedisException $redisException) {
+            report($redisException);
+        }
+
+        $dbLock = (new UniqueLock(\Illuminate\Support\Facades\Cache::driver(config("laravel-bus.alternative_cache_driver"))))
+            ->acquire($this->job);
+
+        return $redisLock || $dbLock;
+    }
+
 
     /**
      * Handle the object's destruction.
@@ -72,7 +103,7 @@ class PendingDispatch extends BusPendingDispatch
             } else {
                 app(Dispatcher::class)->dispatch($this->job);
             }
-        } catch (\Throwable $th) {
+        } catch (RedisException $th) {
             $defaultConnection = config('queue.default');
             $defaultConnectionSettings = config("queue.connections.$defaultConnection");
             $queue = $this->job->queue ?? ($defaultConnectionSettings['queue'] ?? "default");
@@ -83,9 +114,10 @@ class PendingDispatch extends BusPendingDispatch
             $queueFailedJobProvider->log(
                 $this->job->connection ?? $defaultConnection,
                 $queue,
-                json_encode($this->createJobPayload($queue)),
+                json_encode($this->createJobPayload()),
                 $th
             );
+            report($th);
         }
     }
 }
