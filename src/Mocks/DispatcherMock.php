@@ -11,7 +11,7 @@ class DispatcherMock implements Dispatcher
      */
     public function dispatch($command)
     {
-        throw new \Exception();
+        throw new \RedisException();
     }
 
     public function dispatchSync($command, $handler = null)
